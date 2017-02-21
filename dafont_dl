@@ -1,0 +1,19 @@
+#!/bin/bash
+#
+# Read dafont download URLs from stdin and download them
+# to the specified directory.
+
+if [ $# -ne 1 ]; then
+  echo 'Usage: dafont_dl <out_dir>' >2
+  exit 1
+fi
+
+cd "$1"
+
+while read url
+do
+  curl $url >temp.zip
+  unzip -d temp_unzipped temp.zip
+  mv temp_unzipped/*.ttf .
+  rm -rf temp_unzipped/ temp.zip
+done
