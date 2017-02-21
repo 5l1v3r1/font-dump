@@ -13,7 +13,7 @@ if [ ! -d "$2" ]; then
 fi
 
 make_font_image() {
-  convert -size 48x48 \
+  convert -size 54x54 \
     -font "$1" -pointsize 42 \
     -fill black \
     -background transparent \

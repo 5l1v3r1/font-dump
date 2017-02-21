@@ -17,8 +17,9 @@ cd "$1"
 
 while read url
 do
-  curl $url >temp.zip
-  unzip -d temp_unzipped temp.zip
-  mv temp_unzipped/*.ttf .
+  echo "Fetching $url"
+  curl -s $url >temp.zip
+  unzip -qq -d temp_unzipped temp.zip
+  mv temp_unzipped/*.ttf . 2>/dev/null
   rm -rf temp_unzipped/ temp.zip
 done

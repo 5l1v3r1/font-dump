@@ -22,5 +22,6 @@ do
   base=$(basename "$font")
   outdir="$2/${base%.ttf}"
   mkdir "$outdir"
+  echo "Rendering $base"
   ./ttf_render "$font" "$outdir"
 done
