@@ -4,12 +4,12 @@
 # to the specified directory.
 
 if [ $# -ne 1 ]; then
-  echo 'Usage: dafont_dl <out_dir>' >2
+  echo 'Usage: dafont_dl <out_dir>' >&2
   exit 1
 fi
 
 if [ ! -d "$1" ]; then
-  echo "bad output directory: $1"
+  echo "bad output directory: $1" >&2
   exit 1
 fi
 

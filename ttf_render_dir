@@ -1,0 +1,26 @@
+#!/bin/bash
+#
+# Render every TTF file in a directory.
+
+if [ $# -ne 2 ]; then
+  echo 'Usage: ttf_render_dir <font_dir> <out_dir>' >&2
+  exit 1
+fi
+
+if [ ! -d "$1" ]; then
+  echo "bad font directory: $1" >&2
+  exit 1
+fi
+
+if [ ! -d "$2" ]; then
+  echo "bad output directory: $2" >&2
+  exit 1
+fi
+
+find "$1" -name "*.ttf" | while read font
+do
+  base=$(basename "$font")
+  outdir="$2/${base%.ttf}"
+  mkdir "$outdir"
+  ./ttf_render "$font" "$outdir"
+done
