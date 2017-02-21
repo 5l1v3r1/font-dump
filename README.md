@@ -1,4 +1,4 @@
-# font_dump
+# font-dump
 
 This project makes it easy to download tons of fonts and dump them to image files.
 
