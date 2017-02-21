@@ -1,0 +1,35 @@
+#!/bin/bash
+#
+# Render a TTF file as character images.
+
+if [ $# -ne 2 ]; then
+  echo 'Usage: ttf_render <font.ttf> <outdir>' >2
+  exit 1
+fi
+
+if [ ! -d "$2" ]; then
+  echo "bad output directory: $2" >2
+  exit 1
+fi
+
+make_font_image() {
+  convert -size 48x48 \
+    -font "$1" -pointsize 42 \
+    -fill black \
+    -background transparent \
+    -gravity center \
+    caption:$2 \
+    "$3/$2.png"
+}
+
+mkdir "$2/lowercase"
+for ch in {a..z}
+do
+  make_font_image "$1" $ch "$2/lowercase"
+done
+
+mkdir "$2/uppercase"
+for ch in {A..Z}
+do
+  make_font_image "$1" $ch "$2/uppercase"
+done
