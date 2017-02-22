@@ -15,7 +15,7 @@ if [ $# -ne 1 ]; then
   exit 1
 fi
 
-find "$1" -depth 1 -type d | while read fontdir
+find "$1" -maxdepth 1 -type d | while read fontdir
 do
   if [ ! -d "$fontdir/lowercase" ]; then
     continue
