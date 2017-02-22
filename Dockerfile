@@ -9,4 +9,5 @@ ADD . /font_dump
 CMD mkdir /tmp/fonts && \
   cd /font_dump && \
   ./dafont_urls | ./dafont_dl /tmp/fonts && \
-  ./ttf_render_dir /tmp/fonts /out
+  ./ttf_render_dir /tmp/fonts /out && \
+  ./redundant_cases /out

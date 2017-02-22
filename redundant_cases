@@ -1,0 +1,44 @@
+#!/bin/bash
+#
+# Rename lowercase directories to lowercase_dup when
+# the lowercase characters are very similar to their
+# uppercase counterparts.
+#
+# When I tested this on 514 fonts, I found that 75
+# of them were redundant.
+# By eyeballing the fonts myself, I can tell that a
+# few redundant fonts were not caught (probably due
+# to translations or scales).
+
+if [ $# -ne 1 ]; then
+  echo 'Usage: font_dump <font_dir>' >&2
+  exit 1
+fi
+
+find "$1" -depth 1 -type d | while read fontdir
+do
+  if [ ! -d "$fontdir/lowercase" ]; then
+    continue
+  elif [ ! -d "$fontdir/uppercase" ]; then
+    continue
+  fi
+
+  similar=1
+
+  # Only check a few characters to speed things up.
+  for ch in a m z
+  do
+    upper=$(echo $ch | tr /a-z/ /A-Z/)
+    lowerpath="$fontdir/lowercase/$ch.png"
+    upperpath="$fontdir/uppercase/$upper.png"
+    cmp=$(compare -metric phash "$lowerpath" "$upperpath" /dev/null 2>&1)
+    if [ "$cmp" != 0 ]; then
+      similar=0
+    fi
+  done
+
+  if [ "$similar" -eq 1 ]; then
+    echo 'Potential case redundancy for font:' $(basename $fontdir)
+    mv "$fontdir/lowercase" "$fontdir/lowercase_dup"
+  fi
+done
