@@ -31,6 +31,10 @@ font_name/
   - uppercase/
     - A.png
     - B.png
+  - digits/
+    - 0.png
+    - 1.png
+    ...
 another_name/
   - lowercase_dup/
     - a.png
@@ -42,4 +46,6 @@ another_name/
     ...
 ```
 
-Note: the `lowercase_dup` directory is used when the lowercase characters appear to be very similar to the uppercase characters. This deals with the fact that, for some reason, many custom fonts only truly have uppercase.
+The `lowercase_dup` directory is used when the lowercase characters appear to be very similar to the uppercase characters. This deals with the fact that, for some reason, many custom fonts only truly have uppercase.
+
+The `digits` directory is only present for fonts that support digits.

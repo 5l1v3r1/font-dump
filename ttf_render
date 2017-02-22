@@ -33,3 +33,16 @@ for ch in {A..Z}
 do
   make_font_image "$1" $ch "$2/uppercase"
 done
+
+mkdir "$2/digits"
+for ch in {0..9}
+do
+  make_font_image "$1" $ch "$2/digits"
+done
+
+# If the font does not support digits, every digit
+# file will look the same (usually a question mark).
+comparison=$(compare -metric phash "$2/digits/2.png" "$2/digits/4.png" /dev/null 2>&1)
+if [ "$comparison" = 0 ]; then
+  rm -r "$2/digits"
+fi
