@@ -38,7 +38,7 @@ do
   done
 
   if [ "$similar" -eq 1 ]; then
-    echo 'Potential case redundancy for font:' $(basename $fontdir)
+    echo 'Potential case redundancy for font:' $(basename "$fontdir")
     mv "$fontdir/lowercase" "$fontdir/lowercase_dup"
   fi
 done
